@@ -2,7 +2,9 @@
 
 Converts entropy measured in bits to "die" (number of dice rolls). 
 
-Use case: you want to get a feel for how hard it is to "guess" a non-diceware password with dice. You know the password is roughly X bits of entropy. This Rust script takes that X bits and converts in to a different (and completely made up) measure of entropy that I'm calling "die". It represents the number of 6-sided die it might take to reproduce that password exactly. 
+## What this does / Use case
+
+You want to get a feel for how hard it is to "guess" a non-diceware password with dice. You know the password is roughly X bits of entropy. This Rust script takes that X bits and converts in to a different (and completely made up) measure of entropy that I'm calling "die". It represents the number of 6-sided die it would theoretically (I think) take to reproduce that password exactly. In other words it estimates the length of the password encoded in base 6.
 
 ## Example
 
