@@ -16,6 +16,9 @@ fn log_base_6(n: f64) -> f64 {
 }
 
 fn bits_to_die(bits: f64) -> f64 {
+    // honestly not sure why the following line doesn't cause
+    // an overflow when bits is greater than 64
+
     let possibilities: f64 = 2_f64.powf(bits) as f64;
     return log_base_6(possibilities);
 }

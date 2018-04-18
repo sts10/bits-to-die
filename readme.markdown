@@ -12,6 +12,10 @@ You want to get a feel for how hard it is to "guess" a non-diceware password wit
 
 Using a dictionary of 7776 words, `probiotic-troubling-breath-salaried-plank-docile` has an entropy of 77.55 bits. This script reports that that is equivalent to 30 die, which is in fact the number of rolls you'd need to generate a 6-word passphrase using the diceware method.
 
+## Lingering Questions
+
+I'm not sure why `f_f64.powf(bits) as f64` in the `bits_to_die` function doesn't cause some sort off overflow in Rust when the entered number of bits is greater than 64. If anybody knows, please leave as issue or pull request!
+
 ## Disclaimers
 
 I'm reading [_An Introduction to Information Theory: Symbols, Signals and Noise_ by John R. Pierce](https://www.amazon.com/Introduction-Information-Theory-Symbols-Mathematics/dp/0486240614) and thought this would be a good exercise to further my understanding of entropy, passwords, and Rust. I don't know if this is scientifically accurate or useful, so, you know, don't rely on it beyond a curiosity. 
