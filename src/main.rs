@@ -1,35 +1,33 @@
 use std::io;
 use std::str::FromStr;
+
 fn main() {
     println!("Enter number of bits or die to be converted to die and bits");
     let input: f64 = ensure("Please try again. Enter a number (a float)").unwrap();
 
     println!("{} bits is equivalent to {} die", input, bits_to_die(input));
-
     println!("{} die is equivalent to {} bits", input, die_to_bits(input));
 }
 
 fn log_base_6(n: f64) -> f64 {
-    let six_as_float: f64 = 6.0;
-    return (n.ln() / six_as_float.ln()) as f64;
+    n.ln() / 6_f64.ln()
 }
 
 fn log_base_2(n: f64) -> f64 {
-    let two_as_float: f64 = 2.0;
-    return (n.ln() / two_as_float.ln()) as f64;
+    n.ln() / 2_f64.ln()
 }
 
 fn bits_to_die(bits: f64) -> f64 {
     // honestly not sure why the following line doesn't cause
     // an overflow when bits is greater than 64
 
-    let possibilities: f64 = 2_f64.powf(bits) as f64;
-    return log_base_6(possibilities);
+    let possibilities: f64 = 2_f64.powf(bits);
+    log_base_6(possibilities)
 }
 
 fn die_to_bits(die: f64) -> f64 {
-    let possibilities: f64 = 6_f64.powf(die) as f64;
-    return log_base_2(possibilities);
+    let possibilities: f64 = 6_f64.powf(die);
+    log_base_2(possibilities)
 }
 
 fn ensure<T: FromStr>(try_again: &str) -> io::Result<T> {
