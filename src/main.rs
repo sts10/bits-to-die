@@ -1,21 +1,22 @@
 use std::io;
+use std::str::FromStr;
 fn main() {
-    // println!("Enter number of bits to be converted to die");
-    // let bits = get_float_from_input() as f64;
+    println!("Enter number of bits or die to be converted to die and bits");
+    let input: f64 = ensure("Please try again. Enter a number (a float)").unwrap();
 
-    // println!(
-    //     "{} bits is equivalent to {} die",
-    //     bits,
-    //     bits_to_die(bits as f64)
-    // );
+    println!(
+        "{} bits is equivalent to {} die",
+        input,
+        bits_to_die(input as f64)
+    );
 
-    println!("Enter number of die to be converted to bits");
-    let die = get_float_from_input() as f64;
+    // println!("Enter number of die to be converted to bits");
+    // let die: f64 = ensure("Please try again. Enter a number (a float)").unwrap();
 
     println!(
         "{} die is equivalent to {} bits",
-        die,
-        die_to_bits(die as f64)
+        input,
+        die_to_bits(input as f64)
     );
 }
 
@@ -42,17 +43,39 @@ fn die_to_bits(die: f64) -> f64 {
     return log_base_2(possibilities);
 }
 
-fn get_float_from_input() -> f64 {
-    let reader: io::Stdin = io::stdin();
-    let mut input_text: String = String::new();
-    let result: Result<usize, io::Error> = reader.read_line(&mut input_text);
-    if result.is_err() {
-        println!("failed to read from stdin");
+fn ensure<T: FromStr>(try_again: &str) -> io::Result<T> {
+    loop {
+        let line = match gets() {
+            Ok(l) => l,
+            Err(e) => return Err(e),
+        };
+        match line.parse() {
+            Ok(res) => return Ok(res),
+            // otherwise, display inputted "try again" message
+            // and continue the loop
+            Err(_e) => {
+                eprintln!("{}", try_again);
+                continue;
+            }
+        };
     }
-    let trimmed: &str = input_text.trim();
-    let option: Option<f64> = trimmed.parse::<f64>().ok();
-    match option {
-        Some(i) => return i,
-        None => return 0.0,
-    };
+}
+
+fn gets() -> io::Result<String> {
+    let mut input = String::new();
+    match io::stdin().read_line(&mut input) {
+        Ok(_n) => Ok(input.trim_end_matches("\n").to_string()),
+        Err(error) => Err(error),
+    }
+}
+
+#[test]
+fn can_calc_bits_to_die() {
+    assert_eq!(bits_to_die(12.92), 4.998138269470278);
+    assert_eq!(bits_to_die(77.55), 30.0004352010387);
+}
+
+#[test]
+fn can_calc_die_to_bits() {
+    assert_eq!(die_to_bits(5 as f64), 12.92481250360578);
 }
