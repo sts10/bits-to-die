@@ -4,20 +4,9 @@ fn main() {
     println!("Enter number of bits or die to be converted to die and bits");
     let input: f64 = ensure("Please try again. Enter a number (a float)").unwrap();
 
-    println!(
-        "{} bits is equivalent to {} die",
-        input,
-        bits_to_die(input as f64)
-    );
+    println!("{} bits is equivalent to {} die", input, bits_to_die(input));
 
-    // println!("Enter number of die to be converted to bits");
-    // let die: f64 = ensure("Please try again. Enter a number (a float)").unwrap();
-
-    println!(
-        "{} die is equivalent to {} bits",
-        input,
-        die_to_bits(input as f64)
-    );
+    println!("{} die is equivalent to {} bits", input, die_to_bits(input));
 }
 
 fn log_base_6(n: f64) -> f64 {
