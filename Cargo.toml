@@ -2,5 +2,6 @@
 name = "entropy-calc"
 version = "0.1.0"
 authors = ["sts10 <sschlinkert@gmail.com>"]
+license = "BlueOak-1.0.0"
 
 [dependencies]
